@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data/APIs</title>
+</head>
+<body>
+    <img src="" id="rainbow" alt="rainbow" width="400px">
+    <img src="" id="rainbow2" alt="rainbow" width="450px">
+    <script>
+        console.log('about to fetch a rainbow')
+
+        catchRainbow()
+        .then(response => {
+            console.log('everything is okay')
+        })
+        .catch(error => {
+            console.error(error);
+        })
+
+        async function catchRainbow(){
+            const response = await fetch('https://cdn.shopify.com/s/files/1/0080/8372/products/tattly_rainbow_jessi_arrington_00_1024x1024@2x.png?v=1531923002')
+            const blob = await response.blob()
+            document.getElementById('rainbow2').src = URL.createObjectURL(blob);
+        }
+
+
+        fetch('https://cdn.shopify.com/s/files/1/0080/8372/products/tattly_rainbow_jessi_arrington_00_1024x1024@2x.png?v=1531923002').then( response => {
+            console.log(response)
+            return response.blob()
+        })
+        .then(response => {
+            console.log(response)
+            document.getElementById('rainbow').src = URL.createObjectURL(response);
+        })
+        .catch(error => {
+            console.log('error!')
+            console.error(error)
+        })
+    </script>
+</body>
+</html>
